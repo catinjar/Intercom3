@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "607881887393",
+    "firebase_url": "https://intercom3-d6b86.firebaseio.com",
+    "project_id": "intercom3-d6b86",
+    "storage_bucket": "intercom3-d6b86.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:607881887393:android:ea4eb3764e229055",
+        "android_client_info": {
+          "package_name": "com.example.obir.intercom3"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "607881887393-qpmhtl1qppfb6k2hb201u26v68c5l7q1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.obir.intercom3",
+            "certificate_hash": "640d7bc935b586a7571ba9f714cced4913daf1ca"
+          }
+        },
+        {
+          "client_id": "607881887393-0l93f74oco5skogvj053m6i81itkb49n.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBgRhhB6ZatP8uC7hHGaniYXxVbux-vGlI"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "607881887393-0l93f74oco5skogvj053m6i81itkb49n.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
