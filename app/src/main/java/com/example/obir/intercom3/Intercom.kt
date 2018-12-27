@@ -3,8 +3,10 @@ package com.example.obir.intercom3
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.KeyEvent
+import android.webkit.WebResourceResponse
 import android.webkit.WebView
 import android.webkit.WebViewClient
+import com.google.firebase.messaging.FirebaseMessaging
 
 
 class Intercom : AppCompatActivity() {
@@ -17,16 +19,21 @@ class Intercom : AppCompatActivity() {
 
         myWebView = findViewById<WebView>(R.id.webview)
 
-        myWebView!!.settings.javaScriptEnabled = true
-
         myWebView!!.webViewClient = object : WebViewClient() {
             override fun shouldOverrideUrlLoading(view: WebView?, url: String?): Boolean {
-                view?.loadUrl(url)
-                return true
+                return false
+            }
+
+            override fun shouldInterceptRequest(view: WebView?, url: String?): WebResourceResponse? {
+                return null
             }
         }
+
+        myWebView!!.settings.javaScriptEnabled = true
+        myWebView!!.clearCache(true)
         myWebView!!.loadUrl(URL)
 
+        FirebaseMessaging.getInstance().subscribeToTopic("all")
     }
     override fun onKeyDown(keyCode: Int, event: KeyEvent): Boolean {
         if (keyCode == KeyEvent.KEYCODE_BACK && myWebView!!.canGoBack()) {
