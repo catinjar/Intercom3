@@ -1,5 +1,6 @@
 package com.example.obir.intercom3
 
+import android.content.Context
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.KeyEvent
@@ -31,7 +32,11 @@ class Intercom : AppCompatActivity() {
 
         myWebView!!.settings.javaScriptEnabled = true
         myWebView!!.clearCache(true)
-        myWebView!!.loadUrl(URL)
+
+        val prefs = getSharedPreferences("com.example.obir.intercom3.PREFERENCE_FILE_KEY", Context.MODE_PRIVATE) ?: return
+        val url = prefs.getString("url", "https://google.com")
+
+        myWebView!!.loadUrl(url)
 
         FirebaseMessaging.getInstance().subscribeToTopic("all")
     }
