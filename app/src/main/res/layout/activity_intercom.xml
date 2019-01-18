@@ -9,8 +9,14 @@
 
     <WebView
             android:id="@+id/webview"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            tools:layout_editor_absoluteY="8dp"
-            tools:layout_editor_absoluteX="11dp"/>
+            android:layout_width="386dp"
+            android:layout_height="414dp"
+            tools:layout_editor_absoluteX="0dp"
+            tools:layout_editor_absoluteY="0dp"/>
+    <WebView
+            android:id="@+id/soundview"
+            android:layout_width="1dp"
+            android:layout_height="1dp"
+            tools:layout_editor_absoluteY="467dp"
+            tools:layout_editor_absoluteX="8dp"/>
 </android.support.constraint.ConstraintLayout>

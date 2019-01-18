@@ -12,6 +12,7 @@ import com.google.firebase.messaging.FirebaseMessaging
 
 class Intercom : AppCompatActivity() {
     var myWebView: WebView? = null
+    var mySoundView: WebView? = null
     var URL = "https://www.google.com/"
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -19,6 +20,7 @@ class Intercom : AppCompatActivity() {
         setContentView(R.layout.activity_intercom)
 
         myWebView = findViewById<WebView>(R.id.webview)
+        mySoundView = findViewById<WebView>(R.id.soundview)
 
         myWebView!!.webViewClient = object : WebViewClient() {
             override fun shouldOverrideUrlLoading(view: WebView?, url: String?): Boolean {
@@ -34,9 +36,11 @@ class Intercom : AppCompatActivity() {
         myWebView!!.clearCache(true)
 
         val prefs = getSharedPreferences("com.example.obir.intercom3.PREFERENCE_FILE_KEY", Context.MODE_PRIVATE) ?: return
-        val url = prefs.getString("url", "https://google.com")
+        val urlVideo = prefs.getString("video_stream", "https://google.com")
+        val urlAudio = prefs.getString("audio_stream", "https://google.com")
 
-        myWebView!!.loadUrl(url)
+        myWebView!!.loadUrl(urlVideo)
+        mySoundView!!.loadUrl(urlAudio)
 
         FirebaseMessaging.getInstance().subscribeToTopic("all")
     }

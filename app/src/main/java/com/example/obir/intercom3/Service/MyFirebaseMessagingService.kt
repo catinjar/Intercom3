@@ -26,7 +26,8 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
             val prefs = getSharedPreferences("com.example.obir.intercom3.PREFERENCE_FILE_KEY", Context.MODE_PRIVATE) ?: return
 
             with (prefs.edit()) {
-                putString("url", remoteMessage.data["url"]!!)
+                putString("video_stream", remoteMessage.data["video_stream"]!!)
+                putString("audio_stream", remoteMessage.data["audio_stream"]!!)
                 apply()
             }
 
