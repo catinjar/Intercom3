@@ -52,9 +52,11 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
                 .setSmallIcon(R.drawable.notification_icon_background)
                 .setContentTitle(remoteMessage.data["title"])
                 .setContentText(remoteMessage.data["body"])
-                .setPriority(NotificationCompat.PRIORITY_HIGH)
+                .setPriority(NotificationCompat.PRIORITY_MAX)
                 .setContentIntent(pendingIntent)
                 .setAutoCancel(true)
+                .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
+                .setDefaults(Notification.DEFAULT_ALL);
 
             with(NotificationManagerCompat.from(this)) {
                 notify("intercom3_call".hashCode(), mBuilder.build())
