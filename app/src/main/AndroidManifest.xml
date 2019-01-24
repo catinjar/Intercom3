@@ -3,6 +3,7 @@
           package="com.example.obir.intercom3">
 
     <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.CAMERA"/>
 
     <application
             android:allowBackup="true"
@@ -20,12 +21,18 @@
             </intent-filter>
             android:theme="@style/Theme.FullScreen"
         </activity>
+
         <!-- Firebase Service -->
         <service android:name=".Service.MyFirebaseMessagingService">
             <intent-filter>
-                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
             </intent-filter>
         </service>
+
+        <activity android:name=".ScannerActivity">
+        </activity>
+        <activity android:name=".ScanActivity">
+        </activity>
     </application>
 
 </manifest>
