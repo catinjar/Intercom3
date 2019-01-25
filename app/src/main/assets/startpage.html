@@ -1,13 +1,160 @@
-<!DOCTYPE html>
 <html>
+
 <head>
-	<meta charset="utf-8">
-	<title>
-	</title>
+  <title>h264</title>
+  <meta charset="utf8">
+  <link rel="stylesheet" href="lock.css">
+  <link rel="stylesheet" href="fontawesome/css/all.css">
+  <!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
 </head>
+
 <body>
-	<p align="center" style="color:#ff0099; font-size:60px">
-		Intercom
-	</p>
+  <div class="container">
+    <canvas id="stream_canvas" class="row header"></canvas>
+
+    <div class="row dashboard">
+      <div class="panel">
+        <div class="content">
+          <i class="fa fa-lock" id="lock-logo"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- <div class="lock">
+      <button onclick="lock('unlock');" style="font-size: 5em">UNLOCK</button>
+      <button onclick="lock('reject');" style="font-size: 5em">REJECT</button>
+  </div> -->
+
+  <script>
+    var lock = (action) => {
+      var xmlHttp = new XMLHttpRequest();
+      xmlHttp.open("GET", `/lock?action=${action}`); // false for synchronous request
+      xmlHttp.send();
+    }
+  </script>
+
+  <script>
+    var unlock = () => {
+      var lock_logo = document.getElementById('lock-logo');
+
+      if (lock_logo.classList.contains('fa-lock')) {
+
+        lock_logo.classList.remove('fa-lock');
+        lock_logo.classList.add('fa-unlock');
+
+        lock('unlock');
+      }
+    }
+  </script>
+
+  <script type="text/javascript" src="http-live-player.js"></script>
+  <!-- <script type="text/javascript" src="binary.min.js"></script> -->
+  <script type="text/javascript">
+    var canvas = document.getElementById('stream_canvas');
+    canvas.style = "width: 100%; height: auto";
+
+    // Create h264 player.
+    var uri = "ws://" + document.location.host;
+    var wsavc = new WSAvcPlayer(canvas, "webgl", 1, 35);
+    // wsavc.connect(uri);
+
+    // Expose instance for button callbacks.
+    window.wsavc = wsavc;
+  </script>
+  <!-- <script type="text/javascript">
+    // Set client -> server audio stream.
+    var host = 'ws://' + document.location.hostname + ':8082';
+    var client = new BinaryClient(host);
+
+
+    // initializing variables;
+    var soundController = {};
+    soundController.recording = false;
+
+    var audioContext = window.AudioContext || window.webkitAudioContext;
+
+    navigator.mediaDevices = navigator.mediaDevices ||
+      ((navigator.mozGetUserMedia || navigator.webkitGetUserMedia) ? {
+        getUserMedia: function (c) {
+          return new Promise(function (y, n) {
+            (navigator.mozGetUserMedia ||
+              navigator.webkitGetUserMedia).call(navigator, c, y, n);
+          });
+        }
+      } : null);
+
+    if (!navigator.mediaDevices) {
+      console.log("getUserMedia() not supported.");
+    }
+
+    soundController.device = navigator.mediaDevices.getUserMedia({
+      audio: true,
+      video: false
+    });
+
+    soundController.device.then(function (stream) {
+      var context = new audioContext();
+      var audioInput = context.createMediaStreamSource(stream);
+      var bufferSize = 2048;
+      // create a javascript node
+      soundController.recorder = context.createScriptProcessor(bufferSize, 1, 1);
+      // specify the processing function
+      soundController.recorder.onaudioprocess = soundController.recorderProcess;
+      // connect stream to our recorder
+      audioInput.connect(soundController.recorder);
+      // connect our recorder to the previous destination
+      soundController.recorder.connect(context.destination);
+    });
+
+    soundController.device.catch(function (err) {
+      console.log("The following error occured: " + err.name);
+    });
+
+    function convertFloat32ToInt16(buffer) {
+      l = buffer.length;
+      buf = new Int16Array(l);
+      while (l--) {
+        buf[l] = Math.min(1, buffer[l]) * 0x7FFF;
+      }
+      return buf.buffer;
+    }
+
+    soundController.recorderProcess = function (e) {
+      var left = e.inputBuffer.getChannelData(0);
+      if (soundController.recording === true) {
+        // var chunk = convertFloat32ToInt16(left);
+        var chunk = left;
+        console.dir(chunk);
+        soundController.stream.write(chunk);
+      }
+    };
+
+    soundController.startRecording = function () {
+
+      if (soundController.recording === false) {
+        console.log('>>> Start Recording');
+
+        //open binary stream
+        soundController.stream = client.createStream({ data: 'audio' });
+        soundController.recording = true;
+      }
+
+    };
+
+    soundController.stopRecording = function () {
+
+      if (soundController.recording === true) {
+        console.log('||| Stop Recording');
+
+        soundController.recording = false;
+
+        //close binary stream
+        soundController.stream.end();
+      }
+    };
+  </script> -->
+
 </body>
+
 </html>

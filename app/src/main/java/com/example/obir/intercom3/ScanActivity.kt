@@ -11,6 +11,7 @@ import me.dm7.barcodescanner.zxing.ZXingScannerView
 class ScanActivity : AppCompatActivity(), ZXingScannerView.ResultHandler {
 
     private var mScannerView: ZXingScannerView? = null
+    //var qrcodeList: ArrayList<String>? = null
 
     public override fun onCreate(state: Bundle?) {
         super.onCreate(state)
@@ -40,4 +41,5 @@ class ScanActivity : AppCompatActivity(), ZXingScannerView.ResultHandler {
         // If you would like to resume scanning, call this method below:
         //mScannerView.resumeCameraPreview(this);
     }
+
 }

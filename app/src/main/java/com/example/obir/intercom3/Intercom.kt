@@ -15,7 +15,9 @@ import com.google.firebase.messaging.FirebaseMessaging
 class Intercom : AppCompatActivity() {
     var myWebView: WebView? = null
     var mySoundView: WebView? = null
-    var btn: Button? = null
+    var scanQRCode: Button? = null
+    var showQRCode: Button? = null
+    //var showQRCode_tv: TextView? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,7 +37,10 @@ class Intercom : AppCompatActivity() {
         }
 
         myWebView!!.settings.javaScriptEnabled = true
+        myWebView!!.settings.loadWithOverviewMode = true
+        myWebView!!.settings.useWideViewPort = true
         myWebView!!.clearCache(true)
+
 
         val prefs = getSharedPreferences("com.example.obir.intercom3.PREFERENCE_FILE_KEY", Context.MODE_PRIVATE) ?: return
         val urlVideo = prefs.getString("video_stream", "file:///android_asset/startpage.html")
@@ -46,12 +51,16 @@ class Intercom : AppCompatActivity() {
 
         tvresult = findViewById(R.id.tvresult) as TextView
 
-        btn = findViewById(R.id.btn) as Button
+        scanQRCode = findViewById(R.id.scanqrcode) as Button
 
-        btn!!.setOnClickListener {
+        scanQRCode!!.setOnClickListener {
             val intent = Intent(this@Intercom, ScanActivity::class.java)
             startActivity(intent)
         }
+
+       // showQRCode = findViewById(R.id.showqrcode) as Button
+        //showQRCode_tv = findViewById(R.id.showqrcode_tv) as TextView
+
 
         FirebaseMessaging.getInstance().subscribeToTopic("all")
     }
